@@ -1,25 +1,71 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dynamic Table Creator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      background: #f4f4f4;
+    }
 
-<html>
+    table {
+      border-collapse: collapse;
+      margin-top: 20px;
+      width: 100%;
+    }
 
-	<head>
-		<meta charset=utf-8 /> 
-		<title>Create a table</title> 
-		<style type="text/css"> 
-			body {margin: 30px;} 	
-		</style>
-		<link rel="stylesheet" href="styles.css">
-	</head>
+    td, th {
+      border: 1px solid #333;
+      padding: 10px;
+      text-align: center;
+    }
 
-	<body>
-		<table id="myTable" border="1"> 
-		</table>
-		<form> 
-			<input type="button" onclick="createTable()" value="Create the table"> 
-		</form>
-		<script type="text/javascript" src="./script.js">
-	</script>
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
 
-	</body>
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
 
+  <button onclick="createTable()">Create the table</button>
+  <table id="myTable"></table>
+
+  <script>
+    function createTable() {
+      const rn = parseInt(prompt("Input number of rows"));
+      const cn = parseInt(prompt("Input number of columns"));
+
+      if (isNaN(rn) || isNaN(cn) || rn <= 0 || cn <= 0) {
+        alert("Invalid input. Please enter positive numeric values.");
+        return;
+      }
+
+      const table = document.getElementById("myTable");
+      table.innerHTML = ""; // Clear existing table
+
+      for (let i = 0; i < rn; i++) {
+        const row = document.createElement("tr");
+        for (let j = 0; j < cn; j++) {
+          const cell = document.createElement("td");
+          cell.textContent = `Row-${i} Column-${j}`;
+          row.appendChild(cell);
+        }
+        table.appendChild(row);
+      }
+    }
+  </script>
+
+</body>
 </html>
